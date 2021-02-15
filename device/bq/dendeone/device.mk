@@ -1,4 +1,4 @@
-
+BANIMATION := $(LOCAL_PATH)/bootanimation
 
 
 
@@ -19,6 +19,11 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/meta_init.project.rc:$(TARGET_COPY_OUT_VENDO
 #PRODUCT_COPY_FILES += $(LOCAL_PATH)/MT6735_Android_scatter.txt:MT6735_Android_scatter.txt
 
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=240
+PRODUCT_PROPERTY_OVERRIDES += qemu.hw.mainkeys=0
+PRODUCT_PROPERTY_OVERRIDES += dalvik.vm.dex2oat-swap=true
+PRODUCT_PROPERTY_OVERRIDES += persist.service.adb.enable=1 
+PRODUCT_PROPERTY_OVERRIDES += persist.service.debuggable=1
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.usb.config=mtp,adb
 
 # thermal.conf and thermal_eng.conf:with BCCT 
 # thermal_NoBCCT.conf and thermal_eng_NoBCCT.conf:no BCCT 
@@ -71,8 +76,12 @@ PRODUCT_PROPERTY_OVERRIDES += ro.vendor.mediatek.platform=MT6737M
 SIM_COUNT := 2
 
 # Audio Related Resource
-PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/k37mv1_bsp/factory/res/sound/testpattern1.wav:$(TARGET_COPY_OUT_VENDOR)/res/sound/testpattern1.wav:mtk
-PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/k37mv1_bsp/factory/res/sound/ringtone.wav:$(TARGET_COPY_OUT_VENDOR)/res/sound/ringtone.wav:mtk
+PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/dendeone/factory/res/sound/testpattern1.wav:$(TARGET_COPY_OUT_VENDOR)/res/sound/testpattern1.wav:mtk
+PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/dendeone/factory/res/sound/ringtone.wav:$(TARGET_COPY_OUT_VENDOR)/res/sound/ringtone.wav:mtk
+# keyboard #
+PRODUCT_COPY_FILES += device/mediatek/mt6735/ACCDET.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ACCDET.kl:mtk
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/mtk-kpd.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/mtk-kpd.kl:mtk
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/mtk-tpd-kpd.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/mtk-tpd-kpd.kl:mtk
 
 
 # Microphone
@@ -85,16 +94,16 @@ PRODUCT_COPY_FILES += $(LOCAL_PATH)/android.hardware.camera.xml:$(TARGET_COPY_OU
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/audio_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy.conf:mtk
 
 #Images for LCD test in factory mode
-PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/k37mv1_bsp/factory/res/images/lcd_test_00.png:$(TARGET_COPY_OUT_VENDOR)/res/images/lcd_test_00.png:mtk
-PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/k37mv1_bsp/factory/res/images/lcd_test_01.png:$(TARGET_COPY_OUT_VENDOR)/res/images/lcd_test_01.png:mtk
-PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/k37mv1_bsp/factory/res/images/lcd_test_02.png:$(TARGET_COPY_OUT_VENDOR)/res/images/lcd_test_02.png:mtk
+PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/dendeone/factory/res/images/lcd_test_00.png:$(TARGET_COPY_OUT_VENDOR)/res/images/lcd_test_00.png:mtk
+PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/dendeone/factory/res/images/lcd_test_01.png:$(TARGET_COPY_OUT_VENDOR)/res/images/lcd_test_01.png:mtk
+PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/dendeone/factory/res/images/lcd_test_02.png:$(TARGET_COPY_OUT_VENDOR)/res/images/lcd_test_02.png:mtk
 
 #media_codecs.xml for video codec support
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml:mtk
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml:mtk
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/media_codecs_mediatek_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_audio.xml:mtk
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/media_codecs_mediatek_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_video.xml:mtk
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/mtk_omx_core.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mtk_omx_core.cfg:mtk
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/media_codecs_mediatek_video_gmo.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_mediatek_video.xml:mtk
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/mtk_omx_core_gmo.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mtk_omx_core.cfg:mtk
 PRODUCT_COPY_FILES += frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml
 PRODUCT_COPY_FILES += frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
 
