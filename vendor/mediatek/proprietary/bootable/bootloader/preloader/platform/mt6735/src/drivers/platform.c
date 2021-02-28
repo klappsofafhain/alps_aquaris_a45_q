@@ -161,7 +161,9 @@ int usb_accessory_in(void)
 {
 #if !CFG_FPGA_PLATFORM
     int exist = 0;
-
+    
+    
+// a4.5 / m4.5 charger off
 #ifdef MTK_BQ24261_SUPPORT
     if( bq24261_get_stat())
     {
@@ -169,6 +171,8 @@ int usb_accessory_in(void)
         mdelay(100);
     }
 #endif
+// a4.5 / m4.5 charger off
+
 
     if (PMIC_CHRDET_EXIST == pmic_IsUsbCableIn()) {
         exist = 1;

@@ -423,9 +423,13 @@ ifeq ("$(MTK_BQ24160_SUPPORT)","yes")
     C_OPTION += -DMTK_BQ24160_SUPPORT
 endif
 
+
+# a4.5 / m4.5 charger
 ifeq ("$(MTK_BQ24261_SUPPORT)","yes")
     C_OPTION += -DMTK_BQ24261_SUPPORT
 endif
+# a4.5 / m4.5 charger
+
 
 ifeq ("$(MTK_SEC_VIDEO_PATH_SUPPORT)","yes")
     C_OPTION += -DMTK_SEC_VIDEO_PATH_SUPPORT
