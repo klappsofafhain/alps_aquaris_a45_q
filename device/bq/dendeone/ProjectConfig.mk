@@ -9,7 +9,11 @@ BUILD_LK = yes
 BUILD_MD32 = no
 BUILD_PRELOADER = yes
 CUSTOM_BUILD_VERNO =
+
+# set dram to 0x800000000 for building system for 2GB devices
 CUSTOM_CONFIG_MAX_DRAM_SIZE = 0x40000000
+# //
+
 CUSTOM_HAL_ANT = mt6735_ant_m1
 CUSTOM_HAL_AUDIOFLINGER = audio
 CUSTOM_HAL_CAMERA = camera
@@ -261,8 +265,12 @@ MTK_FSCK_MSDOS_MTK = no
 MTK_FSCK_TUNE = no
 MTK_GAUGE_VERSION = 10
 MTK_GLOBAL_PQ_SUPPORT = no
+
+# set the following GMO - configs to "no" for building better system for 2GB devices, keep it for building for 1GB devices
 MTK_GMO_RAM_OPTIMIZE = yes
 MTK_GMO_ROM_OPTIMIZE = yes
+# //
+
 MTK_GOOGLE_TRUSTY_SUPPORT = no
 MTK_GPS_CHIP = MTK_GPS_MT6735
 MTK_GPS_SUPPORT = yes
