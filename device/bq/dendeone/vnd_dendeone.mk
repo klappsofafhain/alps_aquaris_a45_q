@@ -16,14 +16,14 @@ ifndef SYS_TARGET_PROJECT
 PRODUCT_BUILD_SYSTEM_IMAGE := false
 PRODUCT_BUILD_PRODUCT_IMAGE := false
 endif
-PRODUCT_LOCALES := en_US es_ES ru_RU de_DE fr_FR de_DE tr_TR in_ID it_IT ar_EG hi_IN ur_PK pt_PT nl_NL hu_HU ro_RO cs_CZ ko_KR pl_PL bg_BG lt_LT sk_SK uk_UA da_DK fi_FI nb_NO sv_SE 
+PRODUCT_LOCALES := en_US es_ES ca_ES ru_RU de_DE fr_FR de_DE tr_TR in_ID it_IT ar_EG hi_IN ur_PK pt_PT nl_NL hu_HU ro_RO cs_CZ ko_KR pl_PL bg_BG lt_LT sk_SK uk_UA da_DK fi_FI nb_NO sv_SE 
 PRODUCT_MANUFACTURER := bq
 PRODUCT_NAME := vnd_dendeone_bsp
 PRODUCT_DEVICE := $(strip $(MTK_BASE_PROJECT))
-PRODUCT_MODEL := Aquaris_A45
+PRODUCT_MODEL := Aquaris_A4.5
 PRODUCT_POLICY := android.policy_phone
 PRODUCT_BRAND := bq
-BUILD_FINGERPRINT := alps/full_lcsh6735m_35_bq_n/lcsh6735m_35_bq_n:7.0/NRD90M/1520592560:user/release-keys
+BUILD_FINGERPRINT := bq/Aquaris_A45/Aquaris_A45_sprout:7.0/NRD90M/1520593149:user/release-keys
 
 ifeq ($(TARGET_BUILD_VARIANT), eng)
 KERNEL_DEFCONFIG ?= dendeone_debug_defconfig

@@ -74,7 +74,8 @@ PRODUCT_PROPERTY_OVERRIDES += ro.vendor.mediatek.platform=MT6737M
 
 # set Telephony property - SIM count
 SIM_COUNT := 2
-
+PRODUCT_PROPERTY_OVERRIDES += ro.telephony.sim.count=$(SIM_COUNT)
+PRODUCT_PROPERTY_OVERRIDES += persist.radio.default.sim=0
 # Audio Related Resource
 PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/dendeone/factory/res/sound/testpattern1.wav:$(TARGET_COPY_OUT_VENDOR)/res/sound/testpattern1.wav:mtk
 PRODUCT_COPY_FILES += vendor/mediatek/proprietary/custom/dendeone/factory/res/sound/ringtone.wav:$(TARGET_COPY_OUT_VENDOR)/res/sound/ringtone.wav:mtk
