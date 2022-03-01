@@ -450,10 +450,8 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     /** Control over CPU and battery monitoring */
     // write battery stats every 30 minutes.
-    static final long BATTERY_STATS_TIME = 30 * 60 * 1000;
-    static final boolean MONITOR_CPU_USAGE = true;
-    // don't sample cpu less than every 5 seconds.
-    static final long MONITOR_CPU_MIN_TIME = 5 * 1000;
+  
+ 
     // wait possibly forever for next cpu sample.
     static final long MONITOR_CPU_MAX_TIME = 0x0fffffff;
     static final boolean MONITOR_THREAD_CPU_USAGE = false;
@@ -490,10 +488,7 @@ public class ActivityManagerService extends IActivityManager.Stub
     // could take much longer than usual.
     static final int PROC_START_TIMEOUT_WITH_WRAPPER = 1200*1000;
 
-    // How long we allow a receiver to run before giving up on it.
-    static final int BROADCAST_FG_TIMEOUT = 10*1000;
-    static final int BROADCAST_BG_TIMEOUT = 60*1000;
-
+  
     public static final int MY_PID = myPid();
 
     static final String[] EMPTY_STRING_ARRAY = new String[0];
@@ -510,7 +505,19 @@ public class ActivityManagerService extends IActivityManager.Stub
     // Necessary ApplicationInfo flags to mark an app as persistent
     static final int PERSISTENT_MASK =
             ApplicationInfo.FLAG_SYSTEM|ApplicationInfo.FLAG_PERSISTENT;
-
+            
+    
+    static final long BATTERY_STATS_TIME = SystemProperties.getLong("ro.config.batterystatstime", 1800000);
+    
+    static final int BROADCAST_BG_TIMEOUT = SystemProperties.getInt("ro.config.broadcastbgtimeout", 60000);
+    
+    static final int BROADCAST_FG_TIMEOUT = SystemProperties.getInt("ro.config.broadcastfgtimeout", 10000);
+    
+    static final long MONITOR_CPU_MIN_TIME = SystemProperties.getLong("ro.config.monitorcpumintime", 5000);
+    
+    static final boolean MONITOR_CPU_USAGE = SystemProperties.getBoolean("ro.config.monitorcpuusage", true);
+    
+    
     // Intent sent when remote bugreport collection has been completed
     private static final String INTENT_REMOTE_BUGREPORT_FINISHED =
             "com.android.internal.intent.action.REMOTE_BUGREPORT_FINISHED";

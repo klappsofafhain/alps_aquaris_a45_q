@@ -128,6 +128,10 @@ public final class PowerManagerService extends SystemService
     private static final int MSG_SCREEN_BRIGHTNESS_BOOST_TIMEOUT = 3;
     // Message: Polling to look for long held wake locks.
     private static final int MSG_CHECK_FOR_LONG_WAKELOCKS = 4;
+    
+    private static final boolean DISABLE_POWERHINT = SystemProperties.getBoolean("persist.sys.mtk.pmspowerhint.disable", false);
+    private static final boolean ENABLE_CPUBOOST = SystemProperties.getBoolean("ro.config.wakeupboost", false);
+    private static final boolean ENABLE_PERFORMANCETYPE = SystemProperties.getBoolean("ro.config.performancetype", false);
 
     // Dirty bit: mWakeLocks changed
     private static final int DIRTY_WAKE_LOCKS = 1 << 0;
@@ -223,6 +227,8 @@ public final class PowerManagerService extends SystemService
     // property for last reboot reason
     private static final String REBOOT_PROPERTY = "sys.boot.reason";
 
+    private static final int BUTTON_ON_DURATION = 2 * 1000;
+
     private final Context mContext;
     private final ServiceThread mHandlerThread;
     private final PowerManagerHandler mHandler;
@@ -248,6 +254,7 @@ public final class PowerManagerService extends SystemService
     private SettingsObserver mSettingsObserver;
     private DreamManagerInternal mDreamManager;
     private Light mAttentionLight;
+    private Light mButtonsLight;
 
     private final Object mLock = LockGuard.installNewLock(LockGuard.INDEX_POWER);
 
@@ -854,6 +861,7 @@ public final class PowerManagerService extends SystemService
 
             mLightsManager = getLocalService(LightsManager.class);
             mAttentionLight = mLightsManager.getLight(LightsManager.LIGHT_ID_ATTENTION);
+            mButtonsLight = mLightsManager.getLight(LightsManager.LIGHT_ID_BUTTONS);
 
             // Initialize display power management.
             mDisplayManagerInternal.initPowerManagement(
@@ -1453,7 +1461,11 @@ public final class PowerManagerService extends SystemService
                 || !mBootCompleted || !mSystemReady || mForceSuspendActive) {
             return false;
         }
-
+        
+        if (ENABLE_PERFORMANCETYPE) {
+            SystemProperties.set("sys.performance.enable", "1");
+         }
+         
         Trace.asyncTraceBegin(Trace.TRACE_TAG_POWER, TRACE_SCREEN_ON, 0);
 
         Trace.traceBegin(Trace.TRACE_TAG_POWER, "wakeUp");
@@ -1513,6 +1525,9 @@ public final class PowerManagerService extends SystemService
                 || mWakefulness == WAKEFULNESS_DOZING
                 || !mBootCompleted || !mSystemReady) {
             return false;
+        }
+        if (ENABLE_PERFORMANCETYPE) {
+            SystemProperties.set("sys.performance.enable", "0");
         }
 
         Trace.traceBegin(Trace.TRACE_TAG_POWER, "goToSleep");
@@ -2046,6 +2061,12 @@ public final class PowerManagerService extends SystemService
                     nextTimeout = mLastUserActivityTime
                             + screenOffTimeout - screenDimDuration;
                     if (now < nextTimeout) {
+                        if (now > mLastUserActivityTime + BUTTON_ON_DURATION) {
+                            mButtonsLight.setBrightness(0);
+                        } else {
+                            mButtonsLight.setBrightness(mDisplayPowerRequest.screenBrightnessOverride);
+                            nextTimeout = now + BUTTON_ON_DURATION;
+                        }
                         mUserActivitySummary = USER_ACTIVITY_SCREEN_BRIGHT;
                     } else {
                         nextTimeout = mLastUserActivityTime + screenOffTimeout;
@@ -4997,3 +5018,4 @@ public final class PowerManagerService extends SystemService
         }
     }
 }
+

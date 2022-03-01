@@ -5849,7 +5849,8 @@ public class NotificationManagerService extends SystemService {
             return false;
         }
         // not if in call or the screen's on
-        if (mInCall || mScreenOn) {
+        //if (mInCall || mScreenOn) {
+        if (mInCall) {
             return false;
         }
 
@@ -8555,3 +8556,4 @@ public class NotificationManagerService extends SystemService {
         return Boolean.parseBoolean(val);
     }
 }
+
