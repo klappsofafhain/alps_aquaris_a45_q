@@ -82,7 +82,7 @@ MSDK_LENS_INIT_FUNCTION_STRUCT LensList_main[MAX_NUM_OF_SUPPORT_LENS] =
 	#endif
 
    
-        {S5K3H7YX_SENSOR_ID, DW9714AF_LENS_ID, "DW9714AF", pDW9714AF_getDefaultData}, //a4.5 uses DW9714AF lens
+        {S5K3H7YX_SENSOR_ID, DW9714AF_LENS_ID, "DW9714AF", pDW9714AF_getDefaultData},
        
    
 	#if defined(AD5820AF)
